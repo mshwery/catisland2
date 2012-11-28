@@ -1,9 +1,14 @@
 body {
   background-color: #fff;
   color: #333;
-  font-family: "Open Sans", arial, helvetica, sans-serif;
+  font-family: "Oxygen", "Open Sans", arial, helvetica, sans-serif;
+  // choose one!!
   font-size: 14px;
   line-height: 120%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
 }
 
 p, ol, ul, td {

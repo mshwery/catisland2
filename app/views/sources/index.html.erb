@@ -2,9 +2,9 @@
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Rss</th>
     <th>Url</th>
-    <th>Name</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +12,9 @@
 
 <% @sources.each do |source| %>
   <tr>
+    <td><%= source.name %></td>
     <td><%= source.rss %></td>
     <td><%= source.url %></td>
-    <td><%= source.name %></td>
     <td><%= link_to 'Show', source %></td>
     <td><%= link_to 'Edit', edit_source_path(source) %></td>
     <td><%= link_to 'Destroy', source, confirm: 'Are you sure?', method: :delete %></td>
