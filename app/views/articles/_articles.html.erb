@@ -1,0 +1,11 @@
+<% @articles.each do |article| %>
+  <article>
+    <h2 class="title"><%= link_to article.title, article %></h2>
+    <div class="content">
+      <%= raw(article.summary) %> <%= link_to "Keep reading →", article %>
+    </div>
+    <div class="details">
+      <%= link_to article.source.name, article.source, class: 'source' %>
+    </div>
+  </article>
+<% end %>

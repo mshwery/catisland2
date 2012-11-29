@@ -4,10 +4,10 @@ one:
   title: MyString
   source_id: 1
   body: MyText
-  raw: MyText
+  original_html: MyText
 
 two:
   title: MyString
   source_id: 1
   body: MyText
-  raw: MyText
+  original_html: MyText

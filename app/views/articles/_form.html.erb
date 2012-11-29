@@ -16,16 +16,12 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :source_id %><br />
-    <%= f.number_field :source_id %>
+    <%= f.label :original_url %><br />
+    <%= f.text_field :original_url %>    
   </div>
   <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :raw %><br />
-    <%= f.text_area :raw %>
+    <%= f.label :edited_body, "Content" %><br />
+    <%= f.text_area :edited_body %>
   </div>
   <div class="actions">
     <%= f.submit %>

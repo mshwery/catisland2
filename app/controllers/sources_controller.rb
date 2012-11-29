@@ -15,6 +15,7 @@ class SourcesController < ApplicationController
   # GET /sources/1.json
   def show
     @source = Source.find(params[:id])
+    @articles = @source.articles.sorted
 
     respond_to do |format|
       format.html # show.html.erb

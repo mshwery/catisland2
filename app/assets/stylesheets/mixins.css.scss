@@ -1,0 +1,32 @@
+@mixin box-shadow ($params...) {
+  box-shadow: $params;
+  -webkit-box-shadow: $params;
+  -moz-box-shadow: $params;
+}
+
+@mixin inline-block {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+@mixin border-radius ($radius...) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin opacity ($op:100) {
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=$op);
+  filter:alpha(opacity=$op);
+  -moz-opacity:$op/100;
+  -khtml-opacity:$op/100;
+  opacity:$op/100;
+}
+@mixin transition($params) {
+  -webkit-transition: $params; 
+  -moz-transition: $params; 
+  -o-transition: $params; 
+  -ms-transition: $params; 
+  transition: $params;  
+}

@@ -1,25 +1,17 @@
+<span class="page-title"><%= @article.source.name %></span>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @article.title %>
-</p>
+<article>
+  <h2 class="title"><%= @article.title %></h2>
+  <div class="content">
+    <%= raw(@article.sanitized) %>
+  </div>
+  <div class="details">
+    <%= link_to @article.source.name, @article.source, class: 'source' %>
+    <%= link_to "Full Article →", @article.original_url, target: '_blank' if @article.original_url %>
+  </div>
 
-<p>
-  <b>Source:</b>
-  <%= @article.source_id %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @article.body %>
-</p>
-
-<p>
-  <b>Raw:</b>
-  <%= @article.raw %>
-</p>
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+</article>
