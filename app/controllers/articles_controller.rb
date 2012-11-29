@@ -89,7 +89,7 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url }
+      format.html { redirect_to manage_path }
       format.json { head :no_content }
     end
   end
