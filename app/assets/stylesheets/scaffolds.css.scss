@@ -1,10 +1,31 @@
 body {
-  background-color: #fff;
+  background-color: #eee;
   color: #333;
-  font-family: "Oxygen", "Open Sans", arial, helvetica, sans-serif;
-  // choose one!!
-  font-size: 14px;
-  line-height: 120%;
+  font-family: "Oxygen", "Open Sans", arial, helvetica, sans-serif; // choose one
+  font-size: 1em;
+  line-height: 1.4em;
+  padding-top: 50px;
+  position: relative;
+
+
+  @media (max-width: 480px) {
+    font-size: .875em;
+  }
+
+  #main {
+    max-width: 864px;
+    margin: 0 auto;
+  }
+}
+
+.page-title {
+  position: fixed;
+  width: 200px;
+  text-align: center;
+  left: 50%;
+  top: 10px;
+  right: 50%;
+  margin-left: -100px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,8 +34,16 @@ h1, h2, h3, h4, h5, h6 {
 
 p, ol, ul, td {
   font-family: "Open Sans", arial, helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 120%;
+  line-height: 1.6em;
+}
+
+tr {
+  background: #fff;
+}
+
+td {
+  margin: 1px;
+  padding: 5px 10px;
 }
 
 pre {
@@ -25,12 +54,9 @@ pre {
 
 a {
   color: #000;
-  &:visited {
-    color: #666;
-  }
+  text-decoration: none;
   &:hover {
-    color: #fff;
-    background-color: #000;
+    text-decoration: underline;
   }
 }
 

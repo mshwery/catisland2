@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Gather</title>
+  <meta name="description" content="New Orleans news, personalized.">
+  <meta name="author" content="@mshwery, @andrewishungry">
+  <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,7 +12,14 @@
 </head>
 <body>
 
-<%= yield %>
+  <header>
+    <%= link_to 'Articles', articles_path %>
+    <%= link_to 'Manage', manage_path %>
+  </header>
+
+  <div id="main">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

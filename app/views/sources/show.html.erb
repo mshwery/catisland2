@@ -1,20 +1,8 @@
+<span class="page-title"><%= @source.name %></span>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @source.name %>
-</p>
-
-<p>
-  <b>Rss:</b>
-  <%= @source.rss %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @source.url %>
-</p>
-
+<%= render 'articles/articles' %>
 
 <%= link_to 'Edit', edit_source_path(@source) %> |
 <%= link_to 'Back', sources_path %>
