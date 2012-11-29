@@ -3,13 +3,25 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.sorted
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
     end
   end
+
+  # GET /manage
+  # GET /manage.json
+  def manage
+    @articles = Article.sorted
+
+    respond_to do |format|
+      format.html # manage.html.erb
+      format.json { render json: @articles }
+    end
+  end
+
 
   # GET /articles/1
   # GET /articles/1.json
@@ -77,7 +89,7 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url }
+      format.html { redirect_to manage_path }
       format.json { head :no_content }
     end
   end

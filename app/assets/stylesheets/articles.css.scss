@@ -1,3 +1,62 @@
-// Place all the styles related to the Articles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+article {
+  padding: 10px 20px;
+  background: #fff;
+  margin: 1px;
+
+  @media (max-width: 480px) {
+    padding: 0 10px;
+  }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: 2.5em;
+    border-left: 8px solid #ccc;
+  }
+
+  .content {
+    color: #777;
+    font-weight: 300;
+
+    a {
+      color: #000;
+      font-weight: 400;
+    }
+  }
+
+  .title {
+    font-size: 2.2em;
+    line-height: 120%;
+    letter-spacing: -1px;
+    margin: 0;
+    padding: .5em 0;
+
+    @media (max-width: 480px) {
+      font-size: 1.2em;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 1.8em;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 600px;
+    }
+
+    a:hover {
+      text-decoration: none;
+    } 
+  }
+
+  .details {
+    padding: 10px 0;
+
+    span, a {
+      font-size: .85em;
+      line-height: 100%;
+    }
+    a {
+      text-decoration: underline;
+      margin-right: 10px;
+    }
+  }
+}
