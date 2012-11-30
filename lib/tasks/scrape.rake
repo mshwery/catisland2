@@ -37,11 +37,11 @@ task :full_articles => :environment do
 
   Article.recent.not_scraped.each do |article|
     puts "#{article.id} - #{article.original_url}"
-    doc = Nokogiri::HTML(open(article.original_url)) do |config|
+    doc = Nokogiri::HTML(open(article.original_url), nil, 'utf-8') do |config|
       config.noblanks
     end
 
-    #TODO refactor this crap so an admin dev can easily make adjustments, same with stuff below 
+    #TODO refactor this crap so an admin dev can easily make adjustments 
     item = if article.source.name == "Nola Defender"
       doc.search('a.excerpt-more').each do |link|
         link.remove if link[:href] == article.original_url
@@ -61,6 +61,13 @@ task :full_articles => :environment do
       doc.search('.post-meta span').remove
       doc.search('.mr_social_sharing_wrapper').remove
       doc.css(".post")
+    elsif article.source.name == 'Black and Gold Review'
+      doc.search('.meta').remove
+      doc.search('#notes').remove
+      doc.search('.post-title').remove
+      doc.search('noscript').remove
+      doc.search('script').remove
+      doc.css('.post').children
     end
 
     if item

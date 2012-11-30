@@ -5,7 +5,8 @@ gem 'rails', '3.2.5'
 gem 'pg'
 gem 'nokogiri'
 gem 'will_paginate'
-gem "default_value_for"
+gem 'default_value_for'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.

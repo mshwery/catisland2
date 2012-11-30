@@ -14,12 +14,12 @@
     <td><%= link_to source.name, source %></td>
     <td><%= source.rss %></td>
     <td><%= source.url %></td>
-    <td><%= link_to 'Edit', edit_source_path(source) %></td>
-    <td><%= link_to 'Destroy', source, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Edit', edit_source_path(source) if can? :update, source %></td>
+    <td><%= link_to 'Destroy', source, confirm: 'Are you sure?', method: :delete if can? :destroy, source %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Source', new_source_path %>
+<%= link_to 'New Source', new_source_path if can? :create, Source %>

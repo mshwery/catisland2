@@ -1,5 +1,6 @@
 
 class ArticlesController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @articles = Article.sorted.paginate(:page => params[:page])
@@ -9,6 +10,8 @@ class ArticlesController < ApplicationController
   # GET /manage.json
   def manage
     @articles = Article.sorted.paginate(:page => params[:page])
+
+    authorize! :update, @articles, :message => "Unable to manage articles."
 
     respond_to do |format|
       format.html # manage.html.erb

@@ -1,6 +1,7 @@
 $ ->
   $('.content p').each ->
-    $(this).hide() if $(this).text().trim().length < 1
+    if $(this).text().trim().length < 1 && $(this).children().length < 1
+      $(this).hide() 
 
   if $('body').is('.articles-index, .sources-show')
     loading = false
