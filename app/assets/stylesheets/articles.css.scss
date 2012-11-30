@@ -13,6 +13,10 @@ article {
     border-left: 8px solid #ccc;
   }
 
+  .keep-reading {
+    white-space: nowrap;
+  }
+
   .content {
     color: #777;
     font-weight: 300;
@@ -22,7 +26,7 @@ article {
       font-weight: 400;
     }
   }
-
+  
   .title {
     font-size: 2.2em;
     line-height: 120%;

@@ -2,7 +2,7 @@
   <article>
     <h2 class="title"><%= link_to article.title, article %></h2>
     <div class="content">
-      <%= raw(article.summary) %> <%= link_to "Keep reading →", article %>
+      <%= raw(article.summary) %> <%= link_to "Keep reading →", article, class: 'keep-reading' %>
     </div>
     <div class="details">
       <%= link_to article.source.name, article.source, class: 'source' %>

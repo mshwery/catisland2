@@ -15,6 +15,18 @@ class Article < ActiveRecord::Base
     truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: ' ... ')
   end
 
+  def summary_image_tag
+    doc = Nokogiri::HTML(edited_body)
+    image = doc.xpath("/html/body//img[@src[contains(.,'://') and not(contains(.,'ads.') or contains(.,'ad.') or contains(.,'?'))]][1]").first.to_s
+    sanitize(image)
+  end
+
+  def summary_img
+    doc = Nokogiri::HTML(edited_body)
+    image = doc.xpath("/html/body//img[@src[contains(.,'://') and not(contains(.,'ads.') or contains(.,'ad.') or contains(.,'?'))]][1]").first
+    image['src'].to_s if image
+  end
+
   def sanitized
     sanitize(body.strip, attributes: %w(style src href))
   end
