@@ -1,9 +1,12 @@
-
 class SourcesController < ApplicationController
+  load_and_authorize_resource
+
   # GET /sources
   # GET /sources.json
   def index
     @sources = Source.all
+
+    authorize! :update, @sources, :message => "Unable to manage sources."
 
     respond_to do |format|
       format.html # index.html.erb
