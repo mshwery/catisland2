@@ -4,8 +4,12 @@ class Article < ActiveRecord::Base
   require 'open-uri'  
 
   belongs_to :source
-  attr_accessible :edited_body, :original_html, :source_id, :title, :original_url, :published_at
+  attr_accessible :edited_body, :scraped, :original_html, :source_id, :title, :original_url, :published_at
 
+  default_value_for :scraped, false
+
+  scope :scraped, where(scraped: true)
+  scope :not_scraped, where(scraped: false)
   scope :sorted, :order => 'published_at DESC'
   scope :recent, lambda { where("published_at > ?", 2.day.ago) }
 

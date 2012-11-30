@@ -12,6 +12,7 @@ task :rss_feeds => :environment do
     items.each do |item|
       title = item.xpath('title').text
       article = source.articles.where(title: title).first || source.articles.new(title: title)
+
       article.original_html = item.xpath('description').text
       article.original_url = item.xpath('link').text
       article.published_at = item.xpath('pubDate').text
@@ -34,7 +35,7 @@ task :full_articles => :environment do
   require "nokogiri"
   require "open-uri"
 
-  Article.recent.each do |article|
+  Article.recent.not_scraped.each do |article|
     puts "#{article.id} - #{article.original_url}"
     doc = Nokogiri::HTML(open(article.original_url)) do |config|
       config.noblanks
@@ -42,28 +43,31 @@ task :full_articles => :environment do
 
     #TODO refactor this crap so an admin dev can easily make adjustments, same with stuff below 
     item = if article.source.name == "Nola Defender"
+      doc.search('a.excerpt-more').each do |link|
+        link.remove if link[:href] == article.original_url
+      end
       doc.css(".contentpage .content")
     elsif article.source.name == "Uptown Messenger"
+      doc.search('div.sociable').remove
       doc.css(".post .entry")
     elsif article.source.name == "The Lens"
       doc.css("#article-body .article-copy")
-    elsif article.source.name == "NolaVie"
+    elsif article.source.name == "NolaVie" 
+      doc.search('h1').remove
+      doc.search('div#modal_footer').remove      
+      doc.css(".post")
+    elsif article.source.name == 'Southern Alpha'
+      doc.search('h2').remove
+      doc.search('.post-meta span').remove
+      doc.search('.mr_social_sharing_wrapper').remove
       doc.css(".post")
     end
 
     if item
-      article.original_html = item.to_s
-
-      item.search('a.excerpt-more').each do |link|
-        link.remove if link[:href] == article.original_url # Nola Defender
-      end
-      item.search('div.sociable').remove # Uptown Messenger
-      item.search('h1').remove if item.search('h1').text == article.title # NolaVie
-      item.search('div#modal_footer').remove
-
       item.xpath('//comment()').remove
 
-      article.edited_body = item.to_s
+      article.original_html = article.edited_body = item.to_s
+      article.scraped = true
       article.save
       puts "updated"
     end
