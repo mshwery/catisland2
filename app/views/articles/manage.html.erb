@@ -12,12 +12,12 @@
   <tr>
     <td><%= link_to article.title, article %></td>
     <td><%= article.source.name %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Destroy', article, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to('Edit', edit_article_path(article)) if can? :update, article %></td>
+    <td><%= link_to('Destroy', article, confirm: 'Are you sure?', method: :delete) if can? :destroy, article %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Article', new_article_path %>
+<%= link_to 'New Article', new_article_path if can? :create, Article %>
