@@ -66,6 +66,29 @@ div {
   }
 }
 
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom:1;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
 #notice {
   color: green;
 }
