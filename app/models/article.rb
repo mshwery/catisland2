@@ -7,7 +7,9 @@ class Article < ActiveRecord::Base
   attr_accessible :edited_body, :original_html, :source_id, :title, :original_url, :published_at
 
   scope :sorted, :order => 'published_at DESC'
-  scope :recent, lambda { where("published_at > ?", 1.day.ago) }
+  scope :recent, lambda { where("published_at > ?", 2.day.ago) }
+
+  self.per_page = 20
 
   def summary
     truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: ' ... ')

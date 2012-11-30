@@ -15,7 +15,7 @@ class SourcesController < ApplicationController
   # GET /sources/1.json
   def show
     @source = Source.find(params[:id])
-    @articles = @source.articles.sorted
+    @articles = @source.articles.sorted.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -3,18 +3,13 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.sorted
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @articles }
-    end
+    @articles = Article.sorted.paginate(:page => params[:page])
   end
 
   # GET /manage
   # GET /manage.json
   def manage
-    @articles = Article.sorted
+    @articles = Article.sorted.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # manage.html.erb

@@ -39,6 +39,8 @@ task :full_articles => :environment do
     doc = Nokogiri::HTML(open(article.original_url)) do |config|
       config.noblanks
     end
+
+    #TODO refactor this crap so an admin dev can easily make adjustments, same with stuff below 
     item = if article.source.name == "Nola Defender"
       doc.css(".contentpage .content")
     elsif article.source.name == "Uptown Messenger"
@@ -56,6 +58,10 @@ task :full_articles => :environment do
         link.remove if link[:href] == article.original_url # Nola Defender
       end
       item.search('div.sociable').remove # Uptown Messenger
+      item.search('h1').remove if item.search('h1').text == article.title # NolaVie
+      item.search('div#modal_footer').remove
+
+      item.xpath('//comment()').remove
 
       article.edited_body = item.to_s
       article.save
