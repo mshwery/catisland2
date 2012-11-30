@@ -11,16 +11,9 @@ class SourcesController < ApplicationController
     end
   end
 
-  # GET /sources/1
-  # GET /sources/1.json
   def show
     @source = Source.find(params[:id])
     @articles = @source.articles.sorted.paginate(:page => params[:page])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @source }
-    end
   end
 
   # GET /sources/new

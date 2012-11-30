@@ -2,10 +2,10 @@ $ ->
   $('.content p').each ->
     $(this).hide() if $(this).text().trim().length < 1
 
-  if $('body').hasClass('articles-index')
+  if $('body').is('.articles-index, .sources-show')
     loading = false
     $(window).scroll ->
-      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 100)
+      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 400)
         next = $('.next_page')
         url = next.attr('href')
         if !loading && url
