@@ -3,6 +3,7 @@ task :rss_feeds => :environment do
   require 'nokogiri'
   require 'open-uri'  
 
+  new_items = false
   Source.all.each do |source|
     url = source.rss
     doc = Nokogiri::XML(open(url)) do |config|
@@ -11,23 +12,24 @@ task :rss_feeds => :environment do
     items = doc.xpath('//item')
     items.each do |item|
       title = item.xpath('title').text
-      article = source.articles.where(title: title).first || source.articles.new(title: title)
-
-      article.original_html = item.xpath('description').text
-      article.original_url = item.xpath('link').text
-      article.published_at = item.xpath('pubDate').text
-      if article.save
-        puts "#{source.name} - #{title}: updated"
-      else
-        puts "Could not save '#{title}'."
+      unless article = source.articles.find_by_title(title)
+        article = source.articles.new(title: title)
+        article.original_html = item.xpath('description').text
+        article.original_url = item.xpath('link').text
+        article.published_at = item.xpath('pubDate').text
+        if article.save
+          puts "New article: #{source.name} - #{title}"
+          new_items = true
+        else
+          puts "Could not save '#{article.original_url}'."
+        end
+        # item.xpath('category').each do |cat|
+        #   puts cat.text
+        # end        
       end
-      # item.xpath('category').each do |cat|
-      #   puts cat.text
-      # end
     end
-    # price = doc.at_css(".PriceXLBold, .PriceCompare .BodyS").text[/[0-9\.]+/]
-    # product.update_attribute(:price, price)
   end
+  puts "No new articles" if !new_items
 end
 
 desc "Gather full articles"
@@ -53,21 +55,17 @@ task :full_articles => :environment do
     elsif article.source.name == "The Lens"
       doc.css("#article-body .article-copy")
     elsif article.source.name == "NolaVie" 
-      doc.search('h1').remove
-      doc.search('div#modal_footer').remove      
+      doc.search('h1, div#modal_footer').remove      
       doc.css(".post")
     elsif article.source.name == 'Southern Alpha'
-      doc.search('h2').remove
-      doc.search('.post-meta span').remove
-      doc.search('.mr_social_sharing_wrapper').remove
+      doc.search('h2, .post-meta span, .mr_social_sharing_wrapper').remove
       doc.css(".post")
     elsif article.source.name == 'Black and Gold Review'
-      doc.search('.meta').remove
-      doc.search('#notes').remove
-      doc.search('.post-title').remove
-      doc.search('noscript').remove
-      doc.search('script').remove
+      doc.search('.meta, #notes, .post-title, noscript, script').remove
       doc.css('.post').children
+    elsif article.source.name == 'Silicon Bayou News'
+      doc.search('.post-title, .tweetthis, .meta, .cats, .tags').remove
+      doc.css('.post .entry').children
     end
 
     if item

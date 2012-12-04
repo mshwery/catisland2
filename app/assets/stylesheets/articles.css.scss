@@ -3,6 +3,10 @@ article {
   background: #fff;
   margin: 1px;
 
+  img {
+    max-width: 100%;
+  }
+
   @media (max-width: 480px) {
     padding: 0 10px;
   }
