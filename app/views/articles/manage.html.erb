@@ -1,4 +1,5 @@
 <h1>Articles</h1>
+<%= link_to 'New Article', new_article_path if can? :create, Article %>
 
 <table>
   <tr>
@@ -19,5 +20,4 @@
 </table>
 
 <br />
-
-<%= link_to 'New Article', new_article_path if can? :create, Article %>
+<%= will_paginate @articles %>
