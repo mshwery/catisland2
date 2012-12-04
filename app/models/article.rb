@@ -4,6 +4,9 @@ class Article < ActiveRecord::Base
   require 'open-uri'  
 
   belongs_to :source
+  has_many :stashes
+  has_many :users, through: :stashes
+  
   attr_accessible :edited_body, :scraped, :original_html, :source_id, :title, :original_url, :published_at
 
   default_value_for :scraped, false
