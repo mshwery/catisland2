@@ -1,8 +1,9 @@
 <% @articles.each do |article| %>
   <article>
+    <%= link_to 'Stash', article_stash_path(article), class: "stash btn #{'stashed' if article.stashed_by(current_user)}" if current_user %>
     <h2 class="title"><%= link_to article.title, article %></h2>
     <div class="content">
-      <%= raw(article.summary) %> <%= link_to "Keep reading →", article, class: 'keep-reading' %>
+      <%= article.summary %> <%= link_to "Keep reading →", article, class: 'keep-reading' %>
     </div>
     <div class="details">
       <%= link_to article.source.name, article.source, class: 'source' %>

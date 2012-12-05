@@ -4,6 +4,9 @@ class Article < ActiveRecord::Base
   require 'open-uri'  
 
   belongs_to :source
+  has_many :stashes
+  has_many :users, through: :stashes
+  
   attr_accessible :edited_body, :scraped, :original_html, :source_id, :title, :original_url, :published_at
 
   default_value_for :scraped, false
@@ -16,7 +19,7 @@ class Article < ActiveRecord::Base
   self.per_page = 20
 
   def summary
-    truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: ' ... ')
+    truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: '... ')
   end
 
   def summary_image_tag
@@ -37,6 +40,16 @@ class Article < ActiveRecord::Base
 
   def body
     edited_body || original_html
+  end
+
+  def stashed_by(u)
+    u.articles.include?(self)
+  end
+
+  def stash_for(u)
+    stash = self.stashes.new
+    stash.user = u
+    stash.save
   end
 
 end
