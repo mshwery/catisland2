@@ -2,7 +2,8 @@
 
 <p id="notice"><%= notice %></p>
 
-<article>
+<article class="cf">
+  <%= link_to 'Read later', article_stash_path(@article), class: "stash btn #{'stashed' if @article.stashed_by(current_user)}" if current_user %>
   <h2 class="title"><%= @article.title %></h2>
   <div class="content">
     <%= raw(@article.sanitized) %>

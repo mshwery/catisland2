@@ -46,10 +46,14 @@ class Article < ActiveRecord::Base
     u.articles.include?(self)
   end
 
-  def stash_for(u)
-    stash = self.stashes.new
-    stash.user = u
-    stash.save
+  def toggle_stash_for(u)
+    stash = self.stashes.find_by_user_id(u) || self.stashes.new
+    if stash.new_record?
+      stash.user = u
+      stash.save
+    else
+      stash.destroy
+    end
   end
 
 end

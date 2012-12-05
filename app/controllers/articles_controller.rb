@@ -81,7 +81,7 @@ class ArticlesController < ApplicationController
 
   def stash
     article = Article.find(params[:article_id])
-    article.stash_for(current_user) if current_user
+    article.toggle_stash_for(current_user) if current_user
     redirect_to request.referer
   end
 
