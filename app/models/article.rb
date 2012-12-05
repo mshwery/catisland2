@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
   self.per_page = 20
 
   def summary
-    truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: ' ... ')
+    truncate(strip_tags(sanitized), length: 400, separator: ' ', omission: '... ')
   end
 
   def summary_image_tag
@@ -40,6 +40,16 @@ class Article < ActiveRecord::Base
 
   def body
     edited_body || original_html
+  end
+
+  def stashed_by(u)
+    u.articles.include?(self)
+  end
+
+  def stash_for(u)
+    stash = self.stashes.new
+    stash.user = u
+    stash.save
   end
 
 end
