@@ -1,8 +1,11 @@
 <% @articles.each do |article| %>
-  <article>
+  <article class="cf">
     <%= link_to 'Read later', article_stash_path(article), class: "stash btn #{'stashed' if article.stashed_by(current_user)}" if current_user %>
     <h2 class="title"><%= link_to article.title, article %></h2>
     <div class="content">
+      <% if article.summary_img %>
+        <%= image_tag article.summary_img, class: 'summary-img' %>
+      <% end %>
       <%= article.summary %> <%= link_to "Keep reading →", article, class: 'keep-reading' %>
     </div>
     <div class="details">

@@ -1,7 +1,7 @@
 $red: #e73f3f;
 
 article {
-  padding: 10px 20px;
+  padding: 20px;
   background: #fff;
   margin: 1px;
   position: relative;
@@ -10,10 +10,16 @@ article {
   }
 
   .stash {
-    position: absolute;
-    right: 20px;
-    top: 30px;
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 20px;
     display: none;
+
+    @media (max-width: 480px) {
+      margin-bottom: 10px;
+      margin-left: 10px;
+      display: block;
+    }
   }
 
   .stashed {
@@ -23,10 +29,18 @@ article {
 
   img {
     max-width: 100%;
+    height: auto;
+  }
+
+  .summary-img {
+    float: right;
+    margin-left: 4em;
+    margin-bottom: 2em;
+    max-width: 10em;
   }
 
   @media (max-width: 480px) {
-    padding: 0 10px;
+    padding: 10px;
   }
 
   blockquote {
@@ -54,13 +68,15 @@ article {
     line-height: 120%;
     letter-spacing: -1px;
     margin: 0;
-    padding: .5em 0;
+    padding-bottom: .5em;
+    //padding: .5em 0;
 
     @media (max-width: 480px) {
-      font-size: 1.2em;
+      font-size: 1.3em;
+      letter-spacing: normal;
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 768px) and (min-width: 481px) {
       font-size: 1.8em;
     }
 
