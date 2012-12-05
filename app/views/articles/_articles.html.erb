@@ -1,6 +1,6 @@
 <% @articles.each do |article| %>
   <article>
-    <%= link_to 'Stash', article_stash_path(article), class: "stash btn #{'stashed' if article.stashed_by(current_user)}" if current_user %>
+    <%= link_to 'Read later', article_stash_path(article), class: "stash btn #{'stashed' if article.stashed_by(current_user)}" if current_user %>
     <h2 class="title"><%= link_to article.title, article %></h2>
     <div class="content">
       <%= article.summary %> <%= link_to "Keep reading →", article, class: 'keep-reading' %>
