@@ -2,6 +2,13 @@ article {
   padding: 10px 20px;
   background: #fff;
   margin: 1px;
+  position: relative;
+
+  .stash {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+  }
 
   img {
     max-width: 100%;

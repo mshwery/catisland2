@@ -15,6 +15,7 @@
   <header>
     <nav class="cf">
       <%= link_to 'Articles', articles_path %>
+      <%= link_to 'Stashed', stashes_path if current_user %>
       <%= link_to 'Manage', manage_path if can? [:update, :destroy, :create], Article %>
 
       <div class="account right">

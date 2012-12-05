@@ -79,6 +79,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def stash
+    article = Article.find(params[:article_id])
+    article.stash_for(current_user) if current_user
+    redirect_to request.referer
+  end
+
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
