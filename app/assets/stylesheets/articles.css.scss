@@ -1,13 +1,24 @@
+$red: #e73f3f;
+
 article {
   padding: 10px 20px;
   background: #fff;
   margin: 1px;
   position: relative;
+  &:hover {
+    .stash { display: block; }
+  }
 
   .stash {
     position: absolute;
     right: 20px;
     top: 30px;
+    display: none;
+  }
+
+  .stashed {
+    background: $red;
+    color: #fff;
   }
 
   img {
